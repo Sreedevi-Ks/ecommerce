@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Admin Orders</title>
+
+<style>
+
+body{
+    font-family:Arial;
+    background:#f5f1ee;
+    margin:0;
+}
+
+.sidebar{
+    width:220px;
+    height:100vh;
+    background:#6b0f1a;
+    color:white;
+    position:fixed;
+    padding:20px;
+}
+
+.sidebar a{
+    display:block;
+    color:white;
+    text-decoration:none;
+    margin:20px 0;
+}
+
+.main{
+    margin-left:250px;
+    padding:30px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    background:white;
+}
+
+th,td{
+    border:1px solid #ddd;
+    padding:12px;
+    text-align:center;
+}
+
+th{
+    background:#6b0f1a;
+    color:white;
+}
+
+img{
+    width:80px;
+    height:80px;
+    object-fit:cover;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="sidebar">
+
+    <h2>Admin Panel</h2>
+
+    <a href="{% url 'adminhome' %}">Home</a>
+
+    <a href="{% url 'addproduct' %}">Add Product</a>
+
+    <a href="{% url 'adminorders' %}">Orders</a>
+
+    <a href="{% url 'logout' %}">Logout</a>
+
+</div>
+
+<div class="main">
+
+    <h1>All Orders</h1>
+
+    <table>
+
+        <tr>
+
+            <th>User</th>
+
+            <th>Product</th>
+
+            <th>Image</th>
+
+            <th>Quantity</th>
+
+            <th>Total</th>
+
+            <th>Payment</th>
+
+            <th>Status</th>
+
+        </tr>
+
+        {% for order in orders %}
+
+        <tr>
+
+            <td>{{ order.user.email }}</td>
+
+            <td>{{ order.product.name }}</td>
+
+            <td>
+                <img src="{{ order.product.image }}">
+            </td>
+
+            <td>{{ order.quantity }}</td>
+
+            <td>₹ {{ order.total }}</td>
+
+            <td>{{ order.payment_method }}</td>
+
+            <td>{{ order.status }}</td>
+
+        </tr>
+
+        {% endfor %}
+
+    </table>
+
+</div>
+
+</body>
+</html>

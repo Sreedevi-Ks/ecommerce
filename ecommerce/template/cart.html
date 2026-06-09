@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Cart</title>
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+
+        body{
+            font-family:Arial;
+            background:#fdf9f6;
+        }
+        .navbar{
+            background:#6b0f1a;
+            padding:18px 50px;
+
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+        }
+
+        .logo{
+            color:white;
+            font-size:28px;
+            font-family:Georgia, "Times New Roman", serif;
+        }
+
+        .nav-links a{
+            color:white;
+            text-decoration:none;
+            margin-left:25px;
+            font-size:16px;
+        }
+
+        .nav-links a:hover{
+            opacity:0.8;
+        }
+        .main{
+            padding:40px;
+        }
+
+        h1{
+            text-align:center;
+            color:#6b0f1a;
+            margin-bottom:40px;
+        }
+
+           .cart-container{
+            display:flex;
+            flex-direction:column;
+            gap:25px;
+        }
+
+        .cart-card{
+            background:white;
+            padding:20px;
+            border-radius:12px;
+
+            display:flex;
+            gap:25px;
+            align-items:center;
+
+            box-shadow:0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .cart-card img{
+            width:180px;
+            height:180px;
+            object-fit:cover;
+            border-radius:10px;
+        }
+
+        .cart-info{
+            flex:1;
+        }
+
+        .cart-info h2{
+            color:#6b0f1a;
+            margin-bottom:15px;
+        }
+
+        .cart-info p{
+            margin-bottom:10px;
+            font-size:17px;
+        }
+        .quantity-box{
+            margin-top:15px;
+        }
+
+        .qty-btn{
+
+            padding:8px 14px;
+
+            background:#6b0f1a;
+
+            color:white;
+
+            text-decoration:none;
+
+            border-radius:5px;
+
+            font-size:18px;
+        }
+
+        .qty-number{
+
+            margin:0 15px;
+
+            font-size:20px;
+
+            font-weight:bold;
+        }
+        .total{
+            margin-top:15px;
+            font-size:20px;
+            font-weight:bold;
+            color:#6b0f1a;
+        }
+        .remove-btn{
+
+            display:inline-block;
+
+            margin-top:15px;
+
+            padding:10px 20px;
+
+            background:red;
+
+            color:white;
+
+            text-decoration:none;
+
+            border-radius:6px;
+        }
+        .checkout-box{
+
+            margin-top:50px;
+
+            background:white;
+
+            padding:30px;
+
+            border-radius:12px;
+
+            text-align:center;
+
+            box-shadow:0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .checkout-box h2{
+
+            color:#6b0f1a;
+
+            margin-bottom:25px;
+        }
+
+        .checkout-btn{
+
+            padding:15px 35px;
+
+            border:none;
+
+            background:#6b0f1a;
+
+            color:white;
+
+            font-size:18px;
+
+            border-radius:8px;
+
+            cursor:pointer;
+        }
+
+        .checkout-btn:hover{
+            opacity:0.9;
+        }
+
+    </style>
+
+</head>
+
+<body>
+<div class="navbar">
+
+    <div class="logo">
+
+        Aadhya Vastra
+
+    </div>
+
+    <div class="nav-links">
+
+        <a href="{% url 'userindex' %}">
+            Home
+        </a>
+
+        <a href="{% url 'products' %}">
+            Products
+        </a>
+
+        <a href="{% url 'cart' %}">
+            Cart
+        </a>
+
+        <a href="{% url 'orders' %}">
+            Orders
+        </a>
+
+        <a href="{% url 'profile' %}">
+            Profile
+        </a>
+
+        <a href="{% url 'logout' %}">
+            Logout
+        </a>
+
+    </div>
+
+</div>
+<div class="main">
+
+    <h1>My Cart</h1>
+
+    <div class="cart-container">
+
+        {% for item in cart_items %}
+
+        <div class="cart-card">
+
+            <img src="{{ item.product.image }}">
+
+            <div class="cart-info">
+
+                <h2>
+
+                    {{ item.product.name }}
+
+                </h2>
+
+                <p>
+
+                    Price : ₹ {{ item.product.price }}
+
+                </p>
+                <div class="quantity-box">
+
+                    <a href="{% url 'decrease_quantity' item.id %}"
+                       class="qty-btn">
+
+                       -
+
+                    </a>
+
+                    <span class="qty-number">
+
+                        {{ item.quantity }}
+
+                    </span>
+
+                    <a href="{% url 'increase_quantity' item.id %}"
+                       class="qty-btn">
+
+                       +
+
+                    </a>
+
+                </div>
+                <p class="total">
+
+                    Total :
+
+                    ₹ {{ item.total }}
+
+                </p>
+                <a href="{% url 'remove_cart' item.id %}"
+                   class="remove-btn">
+
+                   Remove
+
+                </a>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+    <div class="checkout-box">
+
+        <h2>
+
+            Grand Total : ₹ {{ grand_total }}
+
+        </h2>
+
+        <a href="{% url 'paymentpage' %}">
+
+            <button class="checkout-btn">
+
+                Proceed To Payment
+
+            </button>
+
+        </a>
+
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>My Orders</title>
+
+    <style>
+
+        body{
+            font-family:Arial;
+            background:#fdf9f6;
+            margin: 0;
+        }
+
+        h1{
+            text-align:center;
+            color:#6b0f1a;
+            margin:40px 0;
+        }
+
+        .order-container{
+            display:flex;
+            flex-wrap:wrap;
+            gap:25px;
+            justify-content:center;
+        }
+
+        .order-card{
+            width:280px;
+            background:white;
+            border-radius:12px;
+            overflow:hidden;
+            box-shadow:0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .order-card img{
+            width:100%;
+            height:300px;
+            object-fit:cover;
+        }
+
+        .order-info{
+            padding:20px;
+        }
+
+        .order-info h3{
+            color:#6b0f1a;
+            margin-bottom:10px;
+        }
+        .navbar{
+    background:#6b0f1a;
+    padding:18px 50px;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo{
+    color:white;
+    font-size:28px;
+    font-family:Georgia, "Times New Roman", serif;
+}
+
+.nav-links a{
+    color:white;
+    text-decoration:none;
+    margin-left:25px;
+    font-size:16px;
+}
+
+.nav-links a:hover{
+    opacity:0.8;
+}
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="navbar">
+
+    <div class="logo">
+
+        Aadhya Vastra
+
+    </div>
+
+    <div class="nav-links">
+
+        <a href="{% url 'userindex' %}">
+            Home
+        </a>
+
+        <a href="{% url 'products' %}">
+            Products
+        </a>
+
+        <a href="{% url 'cart' %}">
+            Cart
+        </a>
+
+        <a href="{% url 'profile' %}">
+            Profile
+        </a>
+
+        <a href="{% url 'logout' %}">
+            Logout
+        </a>
+
+    </div>
+
+</div>
+
+<h1>My Orders</h1>
+
+<div class="order-container">
+
+    {% for order in orders %}
+
+    <div class="order-card">
+
+        <img src="{{ order.product.image }}">
+
+        <div class="order-info">
+
+            <h3>
+
+                {{ order.product.name }}
+
+            </h3>
+
+            <p>
+
+                Quantity : {{ order.quantity }}
+
+            </p>
+
+            <p>
+
+                Total : ₹ {{ order.total }}
+
+            </p>
+
+            <p>
+
+                Status : {{ order.status }}
+
+            </p>
+
+        </div>
+
+    </div>
+
+    {% endfor %}
+
+</div>
+
+</body>
+</html>

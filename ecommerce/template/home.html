@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aadhya Vastra</title>
+<style>
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    background: #fdf9f6;
+}
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 60px;
+    background: #6b0f1a;
+    color: white;
+}
+
+.logo {
+    font-size: 26px;
+    font-weight: 600;
+    font-family: Georgia, "Times New Roman", serif;
+}
+
+.nav-links a {
+    margin-left: 25px;
+    text-decoration: none;
+    color: white;
+    font-size: 15px;
+}
+
+.nav-links a:hover {
+    opacity: 0.8;
+}
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 60px;
+}
+.text-section {
+    width: 45%;
+}
+
+.text-section h1 {
+    font-size: 52px;
+    color: #6b0f1a;
+    font-family: Georgia, "Times New Roman", serif;
+    line-height: 1.2;
+}
+
+.text-section p {
+    font-size: 18px;
+    color: #555;
+    margin-top: 10px;
+}
+.hero {
+    position: relative;
+    width: 45%;
+    height: 500px;
+    overflow: hidden;
+    border-radius: 12px;
+}
+
+.hero-slide {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.hero-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.hero-slide.active {
+    opacity: 1;
+}
+.hero::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.25);
+    top: 0;
+}
+.categories {
+    padding: 60px;
+    text-align: center;
+}
+
+.categories h2 {
+    margin-bottom: 30px;
+    font-size: 28px;
+    font-family: Georgia, "Times New Roman", serif;
+}
+
+.category-grid {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+.card {
+    width: 250px;
+    border-radius: 10px;
+    overflow: hidden;
+    background: white;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}
+
+.card h3 {
+    padding: 15px;
+    font-weight: 500;
+}
+.footer {
+    background: #6b0f1a;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+}
+</style>
+</head>
+
+<body>
+<div class="navbar">
+    <div class="logo">Aadhya Vastra</div>
+    <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="{% url 'login' %}">Login</a>
+        <a href="{% url 'register' %}">Register</a>
+    </div>
+</div>
+<div class="container">
+
+    <div class="text-section">
+        <h1>Elegance in Every Thread</h1>
+        <p>Where tradition meets modern style.</p>
+        <p>Discover timeless beauty crafted for every woman.</p>
+    </div>
+
+    <div class="hero">
+        <div class="hero-slide active">
+            <img src="https://www.manyavar.com/dw/image/v2/BJZV_PRD/on/demandware.static/-/Library-Sites-ManyavarSharedLibrary/default/dwfea3fed7/manyavar%20images%20m/51793/The%20Evolution%20of%20Saree%20Fashion%20From%20Classic%20to%20Contemporary_blog%201.jpg">
+        </div>
+        <div class="hero-slide">
+            <img src="https://i0.wp.com/sareeing.com/wp-content/uploads/2025/05/sivaangi-krish-orange-saree-stylish-predrape-halterneck-blouse-3.webp">
+        </div>
+        <div class="hero-slide">
+            <img src="https://www.mohifashion.com/cdn/shop/articles/Designer_saree_-_Mohi.png">
+        </div>
+    </div>
+
+</div>
+<div class="categories">
+    <h2>Shop By Category</h2>
+
+    <div class="category-grid">
+        <div class="card">
+            <img src="https://www.vaarasa.com/cdn/shop/files/IMG_1240_800x.jpg?v=1742123085">
+            <h3>Sarees</h3>
+        </div>
+
+        <div class="card">
+            <img src="https://byhand.in/cdn/shop/files/w37.jpg?v=1722499566">
+            <h3>Kurtis</h3>
+        </div>
+
+        <div class="card">
+            <img src="https://www.shutterstock.com/image-photo/elegant-south-asian-bride-wearing-600nw-2702790347.jpg">
+            <h3>Bridal Wear</h3>
+        </div>
+    </div>
+</div>
+<div class="footer">
+    <p>© 2026 Aadhya Vastra | All Rights Reserved</p>
+</div>
+<script>
+let slides = document.querySelectorAll(".hero-slide");
+let index = 0;
+
+setInterval(() => {
+    slides[index].classList.remove("active");
+    index = (index + 1) % slides.length;
+    slides[index].classList.add("active");
+}, 3000);
+</script>
+
+</body>
+</html>
